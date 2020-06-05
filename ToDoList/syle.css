@@ -85,3 +85,9 @@ form button:hover {
 .todo-item {
   padding: 0rem, 0.5rem;
 }
+
+/* убираем события на клик на иконках */
+.fa-trash,
+.fa-check {
+  pointer-events: none;
+}
