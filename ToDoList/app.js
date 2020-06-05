@@ -2,12 +2,15 @@
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
+const filterOption = document.querySelector('.filter-todo');
 
 //Event Listeners
 todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
+filterOption.addEventListener('click', filterTodo);
 
 //Functions
+//добавление
 function addTodo(event) {
   //предотвращаяем автоматическую перерисовку браузером
   //Prevent form from submitting
@@ -40,8 +43,9 @@ function addTodo(event) {
   todoInput.value = '';
 }
 
+//удаление и отметка
 function deleteCheck(event) {
-  //получаем элемент по которому кликнули
+  //получаем элемент по которому кликнули (кнопка)
   const item = event.target;
   //получаем его родительский элемент
   const todo = item.parentElement;
@@ -59,4 +63,33 @@ function deleteCheck(event) {
   if (item.classList[0] === 'complete-btn') {
     todo.classList.toggle('completed');
   }
+}
+
+//фильтрация
+function filterTodo(event) {
+  const todos = todoList.childNodes;
+  todos.forEach(function (todo) {
+    switch (event.target.value) {
+      case 'all':
+        todo.style.display = 'flex';
+        break;
+      case 'completed':
+        if (todo.classList.contains('completed')) {
+          todo.style.display = 'flex';
+        } else {
+          todo.style.display = 'none';
+        }
+        break;
+      case 'uncompleted':
+        if (!todo.classList.contains('completed')) {
+          todo.style.display = 'flex';
+        } else {
+          todo.style.display = 'none';
+        }
+        break;
+      default:
+        todo.style.display = 'flex';
+        break;
+    }
+  });
 }

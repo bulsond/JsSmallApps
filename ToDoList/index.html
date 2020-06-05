@@ -18,12 +18,22 @@
     <header>
       <h1>Список задач</h1>
     </header>
+    <!-- Ввод новой задачи и фильтрация задач -->
     <form>
       <input type="text" class="todo-input" />
       <button class="todo-button" type="submit">
         <i class="fas fa-plus-square"></i>
       </button>
+      <!-- Выбор -->
+      <div class="select">
+        <select name="todos" class="filter-todo">
+          <option value="all">Все</option>
+          <option value="completed">Завершенные</option>
+          <option value="uncompleted">Текущие</option>
+        </select>
+      </div>
     </form>
+    <!-- Список задач -->
     <div class="todo-container">
       <ul class="todo-list"></ul>
     </div>
