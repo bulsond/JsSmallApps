@@ -2,4 +2,4 @@
 
 сохраняет задачи в localStorage.
 
-[работа программы](todoworking.gif)
+![работа программы](./todoworking.gif)
