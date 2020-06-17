@@ -19,7 +19,26 @@ class DrumKit {
     repeat() {
         const step = this._index % 8;
         const activeBars = document.querySelectorAll(`.b${step}`);
-        console.log(activeBars);
+        //назначаем анимацию для квадратов
+        activeBars.forEach(bar => {
+            bar.style.animation = 'playTrack 0.3s alternate ease-in-out 2';
+            const tokens = bar.classList;
+            // console.log(tokens);
+            //если квадрат был выделен
+            if (tokens.contains('active')) {
+                //определяем какой звуковой файл проиграть
+                if (tokens.contains('kick-pad')) {
+                    this._kickAudio.currentTime = 0;
+                    this._kickAudio.play();
+                } else if (tokens.contains('snare-pad')) {
+                    this._snareAudio.currentTime = 0;
+                    this._snareAudio.play();
+                } else {
+                    this._hihatAudio.currentTime = 0;
+                    this._hihatAudio.play();
+                }
+            }
+        });
         this._index++;
     }
 
@@ -36,6 +55,9 @@ const drumKit = new DrumKit();
 //подписка на событие клика по квадрату (для выделения)
 drumKit._pads.forEach(pad => {
     pad.addEventListener('click', drumKit.activePad);
+    pad.addEventListener('animationend', function () {
+        this.style.animation = '';
+    });
 });
 //подписка на клик по кнопке
 drumKit._playButton.addEventListener('click', () => {
