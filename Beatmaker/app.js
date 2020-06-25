@@ -2,12 +2,16 @@ class DrumKit {
     constructor() {
         this._pads = document.querySelectorAll('.pad');
         this._kickAudio = document.querySelector('.kick-sound');
+        this._currentKick = './sounds/kick-classic.wav';
         this._snareAudio = document.querySelector('.snare-sound');
+        this._currentSnare = './sounds/snare-acoustic01.wav';
         this._hihatAudio = document.querySelector('.hihat-sound');
+        this._currentHihat = './sounds/hihat-acoustic01.wav';
         this._playButton = document.querySelector('.play');
         this._index = 0; //счетчик
         this._bpm = 150; //удары в минуту
         this._isPlaying = null; //флаг запуска воспроизведения
+        this._selects = document.querySelectorAll('select');
     }
 
     //визуальное выделение квадрата после клика по нему
@@ -70,11 +74,33 @@ class DrumKit {
             this._playButton.classList.remove('active');
         }
     }
+
+    //при выборе звука в select
+    changeSound(event) {
+        const selectionName = event.target.name;
+        const selectionValue = event.target.value;
+        //в зависимости от select
+        // присваиваем выбранный путь к файлу звука
+        switch (selectionName) {
+            case 'kick-select':
+                this._kickAudio.src = selectionValue;
+                break;
+            case 'snare-select':
+                this._snareAudio.src = selectionValue;
+                break;
+            case 'hihat-select':
+                this._hihatAudio.src = selectionValue;
+                break;
+        }
+    }
 }
 
 
 //!!! Создаем экемпляр Ударной Установки
 const drumKit = new DrumKit();
+
+//>>События
+
 //подписка на события у квадратов
 drumKit._pads.forEach(pad => {
     //подписка на событие клика по квадрату (для выделения)
@@ -90,4 +116,11 @@ drumKit._pads.forEach(pad => {
 drumKit._playButton.addEventListener('click', () => {
     drumKit.updateButton();
     drumKit.start();
+});
+
+//
+drumKit._selects.forEach(select => {
+    select.addEventListener('change', function (event) {
+        drumKit.changeSound(event);
+    });
 });
