@@ -11,7 +11,7 @@
 <body>
 
     <div class="sequencer">
-        <!-- 1 - KICK -->
+        <!-- Ударный трек 1 - KICK -->
         <div class="kick-track">
             <div class="controls">
                 <h1>Удар</h1>
@@ -36,7 +36,7 @@
                 <div class="pad kick-pad b7"></div>
             </div>
         </div>
-        <!-- 2 - SNARE -->
+        <!-- Ударный трек 2 - SNARE -->
         <div class="snare-track">
             <div class="controls">
                 <h1>Петля</h1>
@@ -60,7 +60,7 @@
                 <div class="pad snare-pad b7"></div>
             </div>
         </div>
-        <!-- 3 - HIHAT -->
+        <!-- Ударный трек 3 - HIHAT -->
         <div class="hihat-track">
             <div class="controls">
                 <h1>Тарелка</h1>
@@ -83,13 +83,21 @@
                 <div class="pad hihat-pad b7"></div>
             </div>
         </div>
+        <!-- Кнопка запуска и выключения проигрывания -->
         <button class="play">Играть</button>
+        <!-- Регулятор темпа -->
+        <div class="tempo">
+            <input type="range" class="tempo-slider" max="300" min="20" value="150">
+            <p>Темп: <span class="tempo-nr">150</span></p>
+        </div>
     </div>
 
+    <!-- Звуковые дорожки -->
     <audio class="kick-sound" src="./sounds/kick-classic.wav"></audio>
     <audio class="snare-sound" src="./sounds/snare-acoustic01.wav"></audio>
     <audio class="hihat-sound" src="./sounds/hihat-acoustic01.wav"></audio>
 
+    <!-- скрипты -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"
         integrity="sha256-+Q/z/qVOexByW1Wpv81lTLvntnZQVYppIL1lBdhtIq0=" crossorigin="anonymous"></script>
     <script src="app.js"></script>

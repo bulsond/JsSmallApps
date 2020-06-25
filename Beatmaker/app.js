@@ -1,18 +1,20 @@
 class DrumKit {
     constructor() {
-        this._pads = document.querySelectorAll('.pad');
-        this._kickAudio = document.querySelector('.kick-sound');
+        this._pads = document.querySelectorAll('.pad'); // треки ударных
+        this._kickAudio = document.querySelector('.kick-sound'); //звук первого ударного
         this._currentKick = './sounds/kick-classic.wav';
-        this._snareAudio = document.querySelector('.snare-sound');
+        this._snareAudio = document.querySelector('.snare-sound'); //звук второго ударного
         this._currentSnare = './sounds/snare-acoustic01.wav';
-        this._hihatAudio = document.querySelector('.hihat-sound');
+        this._hihatAudio = document.querySelector('.hihat-sound'); //звук третьего ударного
         this._currentHihat = './sounds/hihat-acoustic01.wav';
-        this._playButton = document.querySelector('.play');
+        this._playButton = document.querySelector('.play'); // кнопка запуска/останова
         this._index = 0; //счетчик
         this._bpm = 150; //удары в минуту
         this._isPlaying = null; //флаг запуска воспроизведения
         this._selects = document.querySelectorAll('select'); //комбобоксы
         this._muteButtons = document.querySelectorAll('.mute'); //кнопки выкл.звука
+        this._tempoSlider = document.querySelector('.tempo-slider'); // регулятор темпа
+        this._tempoText = document.querySelector('.tempo-nr'); //надпись темпа
     }
 
     //визуальное выделение квадрата после клика по нему
@@ -122,6 +124,24 @@ class DrumKit {
             setSoundVolume(buttonIndex, 1);
         }
     }
+
+    //изменение темпа воспроизведения
+    changeTempo(event) {
+        this._bpm = event.target.value;
+        this._tempoText.innerText = event.target.value;
+    }
+
+    //обновление темпа воспроизведения
+    updateTempo() {
+        //если воспроизведение было запущено то перезапускаем его
+        if (this._playButton.classList.contains('active')) {
+            //останавливаем воспроизведение
+            window.clearInterval(this._isPlaying);
+            this._isPlaying = null;
+            //стартуем заново
+            this.start();
+        }
+    }
 }
 
 
@@ -159,4 +179,12 @@ drumKit._muteButtons.forEach(button => {
     button.addEventListener('click', function (event) {
         drumKit.mute(event);
     });
+});
+
+//события изменения положения регулятора темпа
+drumKit._tempoSlider.addEventListener('input', function (event) {
+    drumKit.changeTempo(event);
+});
+drumKit._tempoSlider.addEventListener('change', function (event) {
+    drumKit.updateTempo();
 });
