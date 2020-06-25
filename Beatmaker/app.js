@@ -7,6 +7,7 @@ class DrumKit {
         this._playButton = document.querySelector('.play');
         this._index = 0; //счетчик
         this._bpm = 150; //удары в минуту
+        this._isPlaying = null; //флаг запуска воспроизведения
     }
 
     //визуальное выделение квадрата после клика по нему
@@ -27,6 +28,8 @@ class DrumKit {
             //если квадрат был выделен
             if (tokens.contains('active')) {
                 //определяем какой звуковой файл проиграть
+                // и воспроизводим нужный звуковой файл
+                // перед запуском воспроизведения требуется сброс времени воспроизведения
                 if (tokens.contains('kick-pad')) {
                     this._kickAudio.currentTime = 0;
                     this._kickAudio.play();
@@ -45,21 +48,46 @@ class DrumKit {
     //запуск отчета и прохождения по квадратам
     start() {
         const interval = (60 / this._bpm) * 1000;
-        window.setInterval(() => {
-            this.repeat();
-        }, interval);
+        //проверяем, что ранее не было запущено воспроизведение
+        if (!this._isPlaying) {
+            this._isPlaying = window.setInterval(() => {
+                this.repeat();
+            }, interval);
+        } else {
+            //удаляем предыдущий запуск воспроизведения
+            window.clearInterval(this._isPlaying);
+            this._isPlaying = null;
+        }
+    }
+
+    //надпись на кнопке воспроизведения
+    updateButton() {
+        if (!this._isPlaying) {
+            this._playButton.innerText = 'Стоп';
+            this._playButton.classList.add('active');
+        } else {
+            this._playButton.innerText = 'Играть';
+            this._playButton.classList.remove('active');
+        }
     }
 }
 
+
+//!!! Создаем экемпляр Ударной Установки
 const drumKit = new DrumKit();
-//подписка на событие клика по квадрату (для выделения)
+//подписка на события у квадратов
 drumKit._pads.forEach(pad => {
+    //подписка на событие клика по квадрату (для выделения)
     pad.addEventListener('click', drumKit.activePad);
+    //подписка на событие окончания анимации, сброс значения анимации
+    //для последуещего возобновления
     pad.addEventListener('animationend', function () {
         this.style.animation = '';
     });
 });
+
 //подписка на клик по кнопке
 drumKit._playButton.addEventListener('click', () => {
+    drumKit.updateButton();
     drumKit.start();
 });
