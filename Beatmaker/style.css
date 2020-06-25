@@ -107,6 +107,11 @@ select {
     cursor: pointer;
 }
 
+/* кнопки выключения звука после клика */
+.mute.active {
+    background: gray;
+}
+
 /* анимация квадратов по нажатию на кнопку */
 @keyframes playTrack {
     from{

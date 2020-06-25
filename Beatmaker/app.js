@@ -11,7 +11,8 @@ class DrumKit {
         this._index = 0; //счетчик
         this._bpm = 150; //удары в минуту
         this._isPlaying = null; //флаг запуска воспроизведения
-        this._selects = document.querySelectorAll('select');
+        this._selects = document.querySelectorAll('select'); //комбобоксы
+        this._muteButtons = document.querySelectorAll('.mute'); //кнопки выкл.звука
     }
 
     //визуальное выделение квадрата после клика по нему
@@ -93,6 +94,34 @@ class DrumKit {
                 break;
         }
     }
+
+    //выключение того или иного ударника
+    mute(event) {
+        //функция для регулирования громкости звука
+        const setSoundVolume = (index, volume) => {
+            switch (index) {
+                case '0':
+                    this._kickAudio.volume = volume;
+                    break;
+                case '1':
+                    this._snareAudio.volume = volume;
+                    break;
+                case '2':
+                    this._hihatAudio.volume = volume;
+                    break;
+            }
+        }
+        //с помощью кастомного атрибута определяем индекс кнопки
+        const buttonIndex = event.target.getAttribute('data-track');
+        //делаем кнопу серой
+        event.target.classList.toggle('active');
+        //устанавливаем нужную громкость звука
+        if (event.target.classList.contains('active')) {
+            setSoundVolume(buttonIndex, 0);
+        } else {
+            setSoundVolume(buttonIndex, 1);
+        }
+    }
 }
 
 
@@ -118,9 +147,16 @@ drumKit._playButton.addEventListener('click', () => {
     drumKit.start();
 });
 
-//
+//событие выбора звука в одном из select
 drumKit._selects.forEach(select => {
     select.addEventListener('change', function (event) {
         drumKit.changeSound(event);
+    });
+});
+
+//событие клика по одной из кнопок выкл.звука
+drumKit._muteButtons.forEach(button => {
+    button.addEventListener('click', function (event) {
+        drumKit.mute(event);
     });
 });
