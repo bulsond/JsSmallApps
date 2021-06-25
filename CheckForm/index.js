@@ -65,7 +65,7 @@ function checkMatching({value, matchValue, parent, small, errorMessages}) {
 
 const formInputs = {
     username: {
-        value: _ => $username.value,
+        value: _ => $username.value.trim(),
         parent: $username.parentElement,
         small: $username.parentElement.querySelector('small'),
         minLength: 3,
@@ -78,14 +78,14 @@ const formInputs = {
         checkRules: [checkEmpty, checkLength]
     },
     email: {
-        value: _ => $email.value,
+        value: _ => $email.value.trim(),
         parent: $email.parentElement,
         small: $email.parentElement.querySelector('small'),
         errorMessages: ['Требуется email', 'Требуется корректный email'],
         checkRules: [checkEmpty, checkEmail]
     },
     password: {
-        value: _ => $password.value,
+        value: _ => $password.value.trim(),
         parent: $password.parentElement,
         small: $password.parentElement.querySelector('small'),
         minLength: 6,
@@ -98,8 +98,8 @@ const formInputs = {
         checkRules: [checkEmpty, checkLength]
     },
     password2: {
-        value: _ => $password2.value,
-        matchValue: _ => $password.value,
+        value: _ => $password2.value.trim(),
+        matchValue: _ => $password.value.trim(),
         parent: $password2.parentElement,
         small: $password2.parentElement.querySelector('small'),
         minLength: 6,
