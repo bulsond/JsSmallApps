@@ -1,39 +1,134 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <title>Пример формы подписки</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css">
+    <title>Пример формы подписки</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-
-  Учитесь программировать, наблюдая за другими
-
-  Посмотрите, как опытные разработчики решают проблемы в режиме реального времени. Просмотр обучающих программ по сценариям-это здорово, но понимание того, как разработчики думают, бесценно.
-
-  Попробуйте бесплатно 7 дней, а затем 20 долларов в месяц после этого
-
-  Имя
-  Фамилия
-  Адрес почты
-  Пароль
-
-  Получите бесплатную пробную версию
-
-  Нажав на кнопку, вы соглашаетесь с нашими Условиями и Услугами
-
-  <footer>
-    <p class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
-    </p>
-  </footer>
-</body>
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro">
+      <div class="container">
+        <!-- Слева -->
+        <div class="left-col">
+          <h1 class="title">Учитесь программировать, наблюдая за другими</h1>
+          <p class="left-content">
+            Посмотрите, как опытные разработчики решают проблемы в режиме
+            реального времени. Просмотр обучающих программ по сценариям-это
+            здорово, но понимание того, как разработчики думают, бесценно.
+          </p>
+        </div>
+        <!-- Справа -->
+        <div class="right-col">
+          <div class="top-box">
+            <p class="top-box-content">
+              <span>Попробуйте бесплатно 7 дней</span>, а затем 20
+              долларов в месяц после этого
+            </p>
+          </div>
+          <div class="form-container">
+            <form action="#">
+              <!--  -->
+              <div class="field-group">
+                <label for="firstName">Имя</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Имя"
+                />
+                <img
+                  class="error-icon"
+                  src="./images/icon-error.svg"
+                  alt="error-sign"
+                />
+                <p class="error-text">Введите свое имя</p>
+              </div>
+              <!--  -->
+              <div class="field-group">
+                <label for="lastName">Фамилия</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Фамилия"
+                />
+                <img
+                  class="error-icon"
+                  src="./images/icon-error.svg"
+                  alt="error-sign"
+                />
+                <p class="error-text">Введите свою фамилию</p>
+              </div>
+              <!--  -->
+              <div class="field-group">
+                <label for="email">Адрес email почты</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Адрес email почты"
+                />
+                <img
+                  class="error-icon"
+                  src="./images/icon-error.svg"
+                  alt="error-sign"
+                />
+                <p class="error-text">Введите адрес email почты</p>
+              </div>
+              <!--  -->
+              <div class="field-group">
+                <label for="password">Пароль</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Пароль"
+                />
+                <img
+                  class="error-icon"
+                  src="./images/icon-error.svg"
+                  alt="error-sign"
+                />
+                <p class="error-text">Введите пароль</p>
+              </div>
+              <!--  -->
+              <button class="button" type="submit">
+                Получить бесплатную пробную версию
+              </button>
+              <p class="form-footer">
+                Нажав на кнопку, вы соглашаетесь с нашими <span>Условиями и Услугами</span>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--  -->
+    <footer>
+      <p class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Your Name Here</a>.
+      </p>
+    </footer>
+  </body>
 </html>
