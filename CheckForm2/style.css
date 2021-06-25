@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 html {
     box-sizing: border-box;
   }
@@ -17,4 +19,26 @@ html {
       --clr-neutral-darkblue: hsl(249, 10%, 26%);
       --clr-neutral-grayishblue: hsl(246, 25%, 77%);
 
+      --ff-base: 'Poppins', sans-serif;
+  }
+
+  body {
+      font-family: var(--ff-base);
+  }
+
+  .intro {
+      min-height: 100vh;
+      width: 100%;
+      padding: 7rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-image: url(./images/bg-intro-mobile.png);
+      background-color: var(--clr-primary-red);
+  }
+
+  .error-text,
+  .error-icon {
+      display: none;
   }
