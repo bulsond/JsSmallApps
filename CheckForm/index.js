@@ -31,13 +31,51 @@ function checkEmail({value, parent, small, errorMessages}) {
     }
 }
 
+function checkLength({value, parent, small, minLength, maxLength, errorMessages}) {
+    const text = value();
+    const length = text.length;
+
+    if (length < minLength) {
+        parent.className = 'form-control error';
+        if (small.innerText === '') {
+            small.innerText = errorMessages[1];
+        }
+    } else if (length > maxLength) {
+        parent.className = 'form-control error';
+        small.innerText = errorMessages[2];
+    }
+     else {
+        parent.className = 'form-control success';
+        small.innerText = '';
+    }
+}
+
+function checkMatching({value, matchValue, parent, small, errorMessages}) {
+    const text = value();
+    const otherText = matchValue();
+    if (text !== otherText) {
+        parent.className = 'form-control error';
+        small.innerText = errorMessages[3];
+    } else {
+        if (small.innerText === '') {
+            parent.className = 'form-control success';
+        }
+    }
+}
+
 const formInputs = {
     username: {
         value: _ => $username.value,
         parent: $username.parentElement,
         small: $username.parentElement.querySelector('small'),
-        errorMessages: ['Требуется имя пользователя'],
-        checkRules: [checkEmpty]
+        minLength: 3,
+        maxLength: 15,
+        errorMessages: [
+            'Требуется имя пользователя',
+            'Имя не должно быть короче 3 символов',
+            'Имя не должно быть длиннее 15 символов'
+        ],
+        checkRules: [checkEmpty, checkLength]
     },
     email: {
         value: _ => $email.value,
@@ -50,19 +88,31 @@ const formInputs = {
         value: _ => $password.value,
         parent: $password.parentElement,
         small: $password.parentElement.querySelector('small'),
-        errorMessages: ['Требуется пароль'],
-        checkRules: [checkEmpty]
+        minLength: 6,
+        maxLength: 25,
+        errorMessages: [
+            'Требуется пароль',
+            'Пароль не должен быть короче 6 символов',
+            'Пароль не должен быть длиннее 25 символов'
+        ],
+        checkRules: [checkEmpty, checkLength]
     },
     password2: {
         value: _ => $password2.value,
+        matchValue: _ => $password.value,
         parent: $password2.parentElement,
         small: $password2.parentElement.querySelector('small'),
-        errorMessages: ['Требуется повторный пароль'],
-        checkRules: [checkEmpty]
+        minLength: 6,
+        maxLength: 25,
+        errorMessages: [
+            'Требуется повторный пароль',
+            'Пароль не должен быть короче 6 символов',
+            'Пароль не должен быть длиннее 25 символов',
+            'Пароли не совпадают!'
+        ],
+        checkRules: [checkEmpty, checkLength, checkMatching]
     },
 };
-
-
 
 // Event listeners
 $form.addEventListener('submit', function (event) {
