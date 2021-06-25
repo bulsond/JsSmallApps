@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка формы</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" type="module"></script>
+</head>
+<body>
+    <section class="container">
+        <form id="form" class="form">
+            <!-- Заголовок -->
+            <h2 class="form-title">Зарегистрируйтесь у нас</h2>
+            <!-- Имя -->
+            <div class="form-control">
+                <label for="username">Имя</label>
+                <input type="text" id="username" placeholder="Введите свое имя">
+                <small>Сообщение об ошибке</small>
+            </div>
+            <!-- Почта -->
+            <div class="form-control">
+                <label for="email">Адрес электронной почты</label>
+                <input type="text" id="email" placeholder="ivanov@yandex.ru">
+                <small>Сообщение об ошибке</small>
+            </div>
+            <!-- Пароль -->
+            <div class="form-control">
+                <label for="password">Придумайте пароль</label>
+                <input type="password" id="password" placeholder="Пароль">
+                <small>Сообщение об ошибке</small>
+            </div>
+            <!-- Повторый пароль -->
+            <div class="form-control">
+                <label for="password2">Повторите пароль, чтобы не ошибиться</label>
+                <input type="password" id="password2" placeholder="Ваш пароль еще раз">
+                <small>Сообщение об ошибке</small>
+            </div>
+            <!-- Кнопка -->
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </section>
+</body>
+</html>
